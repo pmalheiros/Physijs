@@ -1240,8 +1240,10 @@ reportCollisions = function() {
 			pt = manifold.getContactPoint( j );
 			//if ( pt.getDistance() < 0 ) {
 				offset = 2 + (collisionreport[1]++) * COLLISIONREPORT_ITEMSIZE;
-				collisionreport[ offset ] = _objects_ammo[ manifold.getBody0() ];
-				collisionreport[ offset + 1 ] = _objects_ammo[ manifold.getBody1() ];
+				var body0 = manifold.getBody0();
+				var body1 = manifold.getBody1();
+				collisionreport[ offset ] = _objects_ammo[ body0.ptr ];
+				collisionreport[ offset + 1 ] = _objects_ammo[ body1.ptr ];
 
 				_vector = pt.get_m_normalWorldOnB();
 				collisionreport[ offset + 2 ] = _vector.x();
