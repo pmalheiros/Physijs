@@ -7,7 +7,7 @@
 	
 	<link rel="stylesheet" type="text/css" href="css/styles.css" />
 	
-	<script type="text/javascript" src="js/three.min.js"></script>
+	<script type="text/javascript" src="js/three.69.min.js"></script>
 	<script type="text/javascript" src="js/stats.js"></script>
 	<script type="text/javascript" src="../physi.js"></script>
 	
@@ -16,15 +16,14 @@
 	'use strict';
 	
 	Physijs.scripts.worker = '../physijs_worker.js';
-	Physijs.scripts.ammo = 'examples/js/ammo.js';
+	Physijs.scripts.ammo = 'examples/js/ammo.2ca0f1b.js';
 	
 	var initScene, render,
 		ground_material, car_material, wheel_material, wheel_geometry,
-		projector, renderer, render_stats, physics_stats, scene, ground_geometry, ground, light, camera,
+		renderer, render_stats, physics_stats, scene, ground_geometry, ground, light, camera,
 		car = {};
 	
 	initScene = function() {
-		projector = new THREE.Projector;
 		
 		renderer = new THREE.WebGLRenderer({ antialias: true });
 		renderer.setSize( window.innerWidth, window.innerHeight );
