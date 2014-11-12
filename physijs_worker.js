@@ -862,12 +862,14 @@ public_functions.addConstraint = function ( details ) {
                     _objects[ details.objecta ],
                     _objects[ details.objectb ],
                     transforma,
-                    transformb
+                    transformb,
+                    false
                 );
             } else {
                 constraint = new Ammo.btGeneric6DofConstraint(
                     _objects[ details.objecta ],
-                    transforma
+                    transforma,
+                    false
                 );
             }
             Ammo.destroy(transforma);
@@ -1353,9 +1355,9 @@ reportConstraints = function() {
 
             constraintreport[ offset ] = index;
             constraintreport[ offset + 1 ] = offset_body.id;
-            constraintreport[ offset + 2 ] = origin.getX();
-            constraintreport[ offset + 3 ] = origin.getY();
-            constraintreport[ offset + 4 ] = origin.getZ();
+            constraintreport[ offset + 2 ] = origin.x();
+            constraintreport[ offset + 3 ] = origin.y();
+            constraintreport[ offset + 4 ] = origin.z();
             constraintreport[ offset + 5 ] = constraint.getAppliedImpulse();
         }
     }
