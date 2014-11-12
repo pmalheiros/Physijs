@@ -7,7 +7,7 @@
 	
 	<link rel="stylesheet" type="text/css" href="css/styles.css" />
 	
-	<script type="text/javascript" src="js/three.min.js"></script>
+	<script type="text/javascript" src="js/three.69.min.js"></script>
 	<script type="text/javascript" src="js/stats.js"></script>
 	<script type="text/javascript" src="../physi.js"></script>
 	
@@ -16,15 +16,13 @@
 	'use strict';
 	
 	Physijs.scripts.worker = '../physijs_worker.js';
-	Physijs.scripts.ammo = 'examples/js/ammo.js';
+	Physijs.scripts.ammo = 'examples/js/ammo.2ca0f1b.js';
 	
 	var initScene, render, applyForce, setMousePosition, mouse_position,
 		ground_material, box_material,
-		projector, renderer, render_stats, physics_stats, scene, ground, light, camera, box, boxes = [];
+		renderer, render_stats, physics_stats, scene, ground, light, camera, box, boxes = [];
 	
 	initScene = function() {
-		projector = new THREE.Projector;
-		
 		renderer = new THREE.WebGLRenderer({ antialias: true });
 		renderer.setSize( window.innerWidth, window.innerHeight );
 		renderer.shadowMapEnabled = true;
@@ -150,7 +148,7 @@
 			-( ( evt.clientY / renderer.domElement.clientHeight ) * 2 - 1 ),
 			.5
 		);
-		projector.unprojectVector( vector, camera );
+		vector.unproject( camera );
 		vector.sub( camera.position ).normalize();
 		
 		var coefficient = (box.position.y - camera.position.y) / vector.y
