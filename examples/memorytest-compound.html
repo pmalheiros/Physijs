@@ -7,7 +7,7 @@
 	
 	<link rel="stylesheet" type="text/css" href="css/styles.css" />
 	
-	<script type="text/javascript" src="js/three.min.js"></script>
+	<script type="text/javascript" src="js/three.69.min.js"></script>
 	<script type="text/javascript" src="js/stats.js"></script>
 	<script type="text/javascript" src="../physi.js"></script>
 	
@@ -16,7 +16,7 @@
 	'use strict';
 	
 	Physijs.scripts.worker = '../physijs_worker.js';
-	Physijs.scripts.ammo = 'examples/js/ammo.js';
+	Physijs.scripts.ammo = 'examples/js/ammo.physijs.js';
 	
 	var initScene, render, _boxes = [], spawnBox, inc_ready, renderer, render_stats, physics_stats, scene, ground_material, ground, light, camera;
 
@@ -60,7 +60,7 @@
 				}
 				document.getElementById( 'totalcubecount' ).textContent = ( total_cubes );
         		document.getElementById( 'currentcubecount' ).textContent = ( cubes.length );
-        		document.getElementById( 'totalobjects' ).textContent = ( scene.__objects.length );
+        		document.getElementById( 'totalobjects' ).textContent = ( scene._objects.length );
         		if(total_cubes > total_ready){
         			return;
         		}
