@@ -264,6 +264,15 @@ interface btTriangleMesh {
 };
 btTriangleMesh implements btStridingMeshInterface;
 
+enum PHY_ScalarType {
+  "PHY_FLOAT",
+  "PHY_DOUBLE",
+  "PHY_INTEGER",
+  "PHY_SHORT",
+  "PHY_FIXEDPOINT88",
+  "PHY_UCHAR"
+};
+
 interface btConcaveShape {
 };
 btConcaveShape implements btCollisionShape;
@@ -272,6 +281,14 @@ interface btStaticPlaneShape {
   void btStaticPlaneShape([Const, Ref] btVector3 planeNormal, float planeConstant); 
 };
 btStaticPlaneShape implements btConcaveShape;
+
+interface btHeightfieldTerrainShape {
+  void btHeightfieldTerrainShape(long heightStickWidth, long heightStickLength, [Const] any heightfieldData, float heightScale, float minHeight, float maxHeight, long upAxis, PHY_ScalarType heightDataType, boolean flipQuadEdges);
+  void btHeightfieldTerrainShape(long heightStickWidth, long heightStickLength, [Const] any heightfieldData, float maxHeight, long upAxis, boolean useFloatData, boolean flipQuadEdges);
+
+  float getRawHeightFieldValue(long x, long y);
+};
+btHeightfieldTerrainShape implements btConcaveShape;
 
 interface btTriangleMeshShape {
 };

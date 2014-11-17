@@ -207,7 +207,8 @@ createShape = function( description ) {
             var ptr = Ammo.allocate(4 * description.xpts * description.ypts, "float", Ammo.ALLOC_NORMAL);
 
             for (var f = 0; f < description.points.length; f++) {
-                Ammo.setValue(ptr + f,  description.points[f]  , 'float');
+                Ammo.setValue(ptr + f,  description.points[f], 'float');
+                //console.log("Input Position["+(f<10?" ":"")+f+"]: "+Ammo.getValue(ptr+f, 'float'));
             }
 
             shape = new Ammo.btHeightfieldTerrainShape(
