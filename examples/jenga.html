@@ -7,7 +7,7 @@
 	
 	<link rel="stylesheet" type="text/css" href="css/styles.css" />
 	
-	<script type="text/javascript" src="js/three.min.js"></script>
+	<script type="text/javascript" src="js/three.69.min.js"></script>
 	<script type="text/javascript" src="js/stats.js"></script>
 	<script type="text/javascript" src="../physi.js"></script>
 	
@@ -16,7 +16,7 @@
 	'use strict';
 	
 	Physijs.scripts.worker = '../physijs_worker.js';
-	Physijs.scripts.ammo = 'examples/js/ammo.js';
+	Physijs.scripts.ammo = 'examples/js/ammo.physijs.js';
 	
 	var initScene, initEventHandling, render, createTower,
 		renderer, render_stats, physics_stats, scene, dir_light, am_light, camera,
@@ -174,7 +174,6 @@
 	
 	initEventHandling = (function() {
 		var _vector = new THREE.Vector3,
-			projector = new THREE.Projector(),
 			handleMouseDown, handleMouseMove, handleMouseUp;
 		
 		handleMouseDown = function( evt ) {
@@ -186,7 +185,7 @@
 				1
 			);
 
-			projector.unprojectVector( _vector, camera );
+			_vector.unproject( camera );
 			
 			ray = new THREE.Raycaster( camera.position, _vector.sub( camera.position ).normalize() );
 			intersections = ray.intersectObjects( blocks );
@@ -219,7 +218,7 @@
 					-( evt.clientY / window.innerHeight ) * 2 + 1,
 					1
 				);
-				projector.unprojectVector( _vector, camera );
+				_vector.unproject( camera );
 				
 				ray = new THREE.Raycaster( camera.position, _vector.sub( camera.position ).normalize() );
 				intersection = ray.intersectObject( intersect_plane );
