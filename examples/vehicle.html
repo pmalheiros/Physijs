@@ -21,12 +21,10 @@
 
     var initScene, render,
         ground_material, box_material,
-        projector, renderer, render_stats, physics_stats, scene, ground, light, camera,
+        renderer, render_stats, physics_stats, scene, ground, light, camera,
             vehicle_body, vehicle;
 
     initScene = function() {
-        projector = new THREE.Projector;
-
         renderer = new THREE.WebGLRenderer({ antialias: true });
         renderer.setSize( window.innerWidth, window.innerHeight );
         renderer.shadowMapEnabled = true;
@@ -133,7 +131,9 @@
 
         // If your plane is not square as far as face count then the HeightfieldMesh
         // takes two more arguments at the end: # of x faces and # of z faces that were passed to THREE.PlaneMaterial
-        ground = new Physijs.HeightfieldMesh(
+        // FIXME: HeightfieldMesh is broken currently
+        //ground = new Physijs.HeightfieldMesh(
+        ground = new Physijs.PlaneMesh(
                 ground_geometry,
                 ground_material,
                 0 // mass
