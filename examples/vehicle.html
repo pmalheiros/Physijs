@@ -131,9 +131,7 @@
 
         // If your plane is not square as far as face count then the HeightfieldMesh
         // takes two more arguments at the end: # of x faces and # of z faces that were passed to THREE.PlaneMaterial
-        // FIXME: HeightfieldMesh is broken currently
-        //ground = new Physijs.HeightfieldMesh(
-        ground = new Physijs.PlaneMesh(
+        ground = new Physijs.HeightfieldMesh(
                 ground_geometry,
                 ground_material,
                 0 // mass
