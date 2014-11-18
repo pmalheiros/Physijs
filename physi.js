@@ -549,7 +549,8 @@ window.Physijs = (function() {
 
     Physijs.Scene.prototype._updateVehicles = function( data ) {
         var vehicle, wheel,
-            i, offset;
+            i, offset,
+            quat = new THREE.Quaternion();
 
         for ( i = 0; i < ( data.length - 1 ) / VEHICLEREPORT_ITEMSIZE; i++ ) {
             offset = 1 + i * VEHICLEREPORT_ITEMSIZE;
@@ -567,12 +568,18 @@ window.Physijs = (function() {
                 data[ offset + 4 ]
             );
 
-            wheel.quaternion.set(
-                data[ offset + 5 ],
+            quat.set(data[ offset + 5 ],
                 data[ offset + 6 ],
                 data[ offset + 7 ],
-                data[ offset + 8 ]
-            );
+                data[ offset + 8 ]);
+
+            // If some model rotation has been set,
+            // ie to use the same wheel model on both sides,
+            // apply that now
+            if (! wheel.model_rotation.equals(new THREE.Quaternion(0, 0, 0, 0))) {
+                quat.multiply(wheel.model_rotation);
+            }
+            wheel.quaternion.copy(quat);
         }
 
         if ( SUPPORT_TRANSFERABLE ) {
@@ -1336,10 +1343,11 @@ window.Physijs = (function() {
             max_suspension_force: tuning.max_suspension_force
         };
     };
-    Physijs.Vehicle.prototype.addWheel = function( wheel_geometry, wheel_material, connection_point, wheel_direction, wheel_axle, suspension_rest_length, wheel_radius, is_front_wheel, tuning ) {
+    Physijs.Vehicle.prototype.addWheel = function( wheel_geometry, wheel_material, connection_point, wheel_direction, wheel_axle, wheel_model_rotation, suspension_rest_length, wheel_radius, is_front_wheel, tuning ) {
         var wheel = new THREE.Mesh( wheel_geometry, wheel_material );
         wheel.castShadow = wheel.receiveShadow = true;
         wheel.position.copy( wheel_direction ).multiplyScalar( suspension_rest_length / 100 ).add( connection_point );
+        wheel.model_rotation = new THREE.Quaternion().copy(wheel_model_rotation);
         this.world.add( wheel );
         this.wheels.push( wheel );
 

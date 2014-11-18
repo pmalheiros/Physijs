@@ -179,7 +179,15 @@
 
                 var wheel_material = new THREE.MeshFaceMaterial( wheel_materials );
 
+                var wheel_model_rotation = new THREE.Quaternion();
                 for ( var i = 0; i < 4; i++ ) {
+                    if (i === 1 || i === 3) {
+                        // Rotate 180 about the Y axis for the left hand wheels
+                        wheel_model_rotation.set(0, 1, 0, 0);
+                    }
+                    else {
+                        wheel_model_rotation.set(0, 0, 0, 0);
+                    }
                     vehicle.addWheel(
                         wheel,
                         wheel_material,
@@ -190,6 +198,7 @@
                         ),
                         new THREE.Vector3( 0, -1, 0 ),
                         new THREE.Vector3( -1, 0, 0 ),
+                        wheel_model_rotation,
                         0.5,
                         0.7,
                         i < 2 ? false : true
