@@ -86,8 +86,7 @@
 
         // Materials
         ground_material = Physijs.createMaterial(
-            new THREE.MeshLambertMaterial({ map: THREE.ImageUtils.loadTexture( 'images/grass.png' ),
-                                            wireframe: true}),
+            new THREE.MeshLambertMaterial({ map: THREE.ImageUtils.loadTexture( 'images/grass.png' ) }),
             .8, // high friction
             .4 // low restitution
         );
@@ -160,16 +159,14 @@
                 case 0:
                     shape = new Physijs.BoxMesh(
                         box_geometry,
-                        material
+                        new Physijs.createMaterial(material, .8, .2)
                     );
                     break;
 
                 case 1:
                     shape = new Physijs.SphereMesh(
                         sphere_geometry,
-                        material,
-                        undefined,
-                        { restitution: Math.random() * 1.5 }
+                        new Physijs.createMaterial(material, .4, Math.random() * 1.5)
                     );
                     break;
             }

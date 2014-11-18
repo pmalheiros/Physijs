@@ -279,15 +279,12 @@ interface btConcaveShape {
 btConcaveShape implements btCollisionShape;
 
 interface btStaticPlaneShape {
-  void btStaticPlaneShape([Const, Ref] btVector3 planeNormal, float planeConstant); 
+  void btStaticPlaneShape([Const, Ref] btVector3 planeNormal, float planeConstant);
 };
 btStaticPlaneShape implements btConcaveShape;
 
 interface btHeightfieldTerrainShape {
-  void btHeightfieldTerrainShape(long heightStickWidth, long heightStickLength, [Const] any heightfieldData, float heightScale, float minHeight, float maxHeight, long upAxis, PHY_ScalarType heightDataType, boolean flipQuadEdges);
-  void btHeightfieldTerrainShape(long heightStickWidth, long heightStickLength, [Const] any heightfieldData, float maxHeight, long upAxis, boolean useFloatData, boolean flipQuadEdges);
-
-  float getRawHeightFieldValue(long x, long y);
+  void btHeightfieldTerrainShape(long heightStickWidth, long heightStickLength, [Const] VoidPtr heightfieldData, float heightScale, float minHeight, float maxHeight, long upAxis, PHY_ScalarType heightDataType, boolean flipQuadEdges);
 };
 btHeightfieldTerrainShape implements btConcaveShape;
 
