@@ -118,16 +118,6 @@
         ground.receiveShadow = true;
         scene.add( ground );
 
-        var x_dir = new THREE.Mesh(new THREE.BoxGeometry(10, 1, 1),
-                                   new THREE.MeshBasicMaterial({color: 0xff0000}));
-        var y_dir = new THREE.Mesh(new THREE.BoxGeometry(1, 10, 1),
-                                   new THREE.MeshBasicMaterial({color: 0x00ff00}));
-        var z_dir = new THREE.Mesh(new THREE.BoxGeometry(1, 1, 10),
-                                   new THREE.MeshBasicMaterial({color: 0x0000ff}));
-        scene.add(x_dir);
-        scene.add(y_dir);
-        scene.add(z_dir);
-
         requestAnimationFrame( render );
         scene.simulate();
 
@@ -200,7 +190,7 @@
                 Math.random() * Math.PI
             );
 
-            if ( addshapes ) {
+            if ( addshapes && shapes < 99 ) {
                 shape.addEventListener( 'ready', createShape );
             }
             scene.add( shape );
